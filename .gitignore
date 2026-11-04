@@ -1,0 +1,8 @@
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Autosave/
+.vs/
+*.sln
+*VR_Shopping_Shelf_Model*.uasset
