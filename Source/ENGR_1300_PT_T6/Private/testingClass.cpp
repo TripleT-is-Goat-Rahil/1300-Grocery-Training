@@ -9,11 +9,11 @@ testingClass::testingClass(FString name, float price)
 	this->priceObject = price;
 }
 
-testingClass::~testingClass()
+testingClass::testingClass()
+	: nameObject(TEXT("")), priceObject(0.0f)
 {
+
 }
-
-
 float testingClass::getPrice() const
 {
 	return priceObject;
@@ -24,6 +24,15 @@ FString testingClass::getName() const
 	return nameObject;
 }
 
+void testingClass::setName(FString name)
+{
+	nameObject=name;
+}
+
+void testingClass::setPrice(float price)
+{
+	priceObject = price;
+}
 void testingClass::addTouchingLeft(testingClass* object)
 {
 	if (object && !touchingLeft.Contains(object))

@@ -17,10 +17,12 @@ private:
 	TArray<testingClass*> touchingTop;
 	TArray<testingClass*> touchingBottom;
 public:
+	testingClass();
 	testingClass(FString nameObject, float priceObject);
-	~testingClass();
 	float getPrice() const;
 	FString getName() const;
+	void setName(FString name);
+	void setPrice(float price);
 	void addTouchingLeft(testingClass* object);
 	void addTouchingRight(testingClass* object);
 	void addTouchingTop(testingClass* object);

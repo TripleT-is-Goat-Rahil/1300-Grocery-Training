@@ -7,7 +7,10 @@
 		{
 			"Name": "ENGR_1300_PT_T6",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [
