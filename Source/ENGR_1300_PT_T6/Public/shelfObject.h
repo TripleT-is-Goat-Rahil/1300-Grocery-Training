@@ -16,6 +16,7 @@ private:
 public:	
 	// Sets default values for this actor's properties
 	AshelfObject();
+	void initialize(FString name,float price);
 
 protected:
 	// Called when the game starts or when spawned

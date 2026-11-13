@@ -26,3 +26,8 @@ void AshelfObject::Tick(float DeltaTime)
 
 }
 
+void AshelfObject::initialize(FString name, float price)
+{
+	object.setName(name);
+	object.setPrice(price);
+}
