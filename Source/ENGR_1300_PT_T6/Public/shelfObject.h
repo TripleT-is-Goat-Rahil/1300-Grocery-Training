@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
 #include "testingClass.h"
 #include "shelfObject.generated.h"
+
 UCLASS()
 class ENGR_1300_PT_T6_API AshelfObject : public AActor
 {
@@ -13,9 +15,14 @@ class ENGR_1300_PT_T6_API AshelfObject : public AActor
 	
 private:
 	testingClass object;
+
+	UPROPERTY(VisibleAnywhere)
+	UBoxComponent* hitbox;
+
 public:	
 	// Sets default values for this actor's properties
 	AshelfObject();
+
 	void initialize(FString name,float price);
 
 protected:
