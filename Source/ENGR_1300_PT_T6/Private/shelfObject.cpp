@@ -19,6 +19,12 @@ AshelfObject::AshelfObject()
 	hitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	hitbox->SetCollisionResponseToAllChannels(ECR_Overlap);
 
+	hitbox->SetGenerateOverlapEvents(true);
+
+	hitbox->OnComponentBeginOverlap.AddDynamic(
+		this,
+		AshelfObject::onHitboxOverlap);
+
 }
 
 // Called when the game starts or when spawned
@@ -39,4 +45,26 @@ void AshelfObject::initialize(FString name, float price)
 {
 	object.setName(name);
 	object.setPrice(price);
+}
+
+void AshelfObject::onHitboxOverlap(
+	UPrimitiveComponent* overlappedComponent,
+	AActor* otherActor,
+	UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex,
+	bool fromSweep,
+	const FHitResult& sweepResult
+)
+{
+	FVector posA = GetActorLocation();
+	FVector posB = otherActor->GetActorLocation();
+
+	AshelfObject* otherObject = Cast<AshelfObject>(otherActor);
+	bool isRight = posB.Y > posA.Y;
+	bool isTop = posB.Z > posA.Z;
+	bool isFront = posB.X < posA.X;
+
+	if (isRight) {
+		otherObject->object.addTouchingRight(&object);
+	}
 }
