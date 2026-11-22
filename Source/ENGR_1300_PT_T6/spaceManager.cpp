@@ -52,6 +52,23 @@ void AspaceManager::onObjectEnter(
 	}
 }
 
+void AspaceManager::onObjectExit(
+	UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor,
+	UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex
+)
+{
+	AshelfObject* detectedObject = Cast<AshelfObject>(OtherActor);
+
+	if (!detectedObject) return;
+
+	float objectX = OtherActor->GetActorLocation().X;
+	float managerX = GetActorLocation().X;
+
+	if (objectX < managerX) shelfObjects.Remove(detectedObject);
+}
+
 // Called when the game starts or when spawned
 void AspaceManager::BeginPlay()
 {
