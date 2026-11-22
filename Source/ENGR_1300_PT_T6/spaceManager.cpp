@@ -3,6 +3,7 @@
 
 #include "spaceManager.h"
 #include "shelfObject.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AspaceManager::AspaceManager()
@@ -19,6 +20,9 @@ AspaceManager::AspaceManager()
 	spaceHitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	spaceHitbox->SetCollisionResponseToAllChannels(ECR_Ignore);
 	spaceHitbox->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap);
+
+	spaceHitbox->SetHiddenInGame(false);
+	spaceHitbox->SetVisibility(true);
 
 	spaceHitbox->SetGenerateOverlapEvents(true);
 
@@ -74,6 +78,31 @@ void AspaceManager::onObjectExit(
 void AspaceManager::Tick(float DeltaTime)
 {
 	AActor::Tick(DeltaTime);
+
+	FColor boxColor = solved ? FColor::Green : FColor::Red;
+
+	DrawDebugBox(
+		GetWorld(),
+		spaceHitbox->GetComponentLocation(),
+		spaceHitbox->GetScaledBoxExtent(),
+		spaceHitbox->GetComponentQuat(),
+		boxColor,
+		false,
+		0.0f,
+		0,
+		2.0f
+	);
+	int reqSolve = 0;
+	if (isPriceRuleset) reqSolve++;
+	if (isRatioRuleset) reqSolve++;
+	if (isPositionRuleset) reqSolve++;
+	int solvePos = 0;
+	if (totalPrice == priceCounter() && isPriceRuleset) solvePos++;
+	if (isRatioRuleset && ratioChecker) solvePos++;
+	if (isPositionRuleset && positionChecker)solvePos++;
+
+	if (reqSolve == solvePos) solved = true;
+
 
 }
 
