@@ -13,8 +13,9 @@ class ENGR_1300_PT_T6_API AshelfObject : public AActor
 {
 	GENERATED_BODY()
 
-private:
+public:
 	testingClass object;
+private:
 
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* hitbox;

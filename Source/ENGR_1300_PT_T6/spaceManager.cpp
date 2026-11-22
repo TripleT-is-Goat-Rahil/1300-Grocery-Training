@@ -18,9 +18,9 @@ AspaceManager::AspaceManager()
 
 	spaceHitbox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	spaceHitbox->SetCollisionResponseToAllChannels(ECR_Ignore);
-	spaceHitbox->SetCollisionResponseToChannel(ECC_WolrdDynamic, ECR_Overlap);
+	spaceHitbox->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap);
 
-	spaceHitBox->SetGenerateOverlapEvents(true);
+	spaceHitbox->SetGenerateOverlapEvents(true);
 
 	spaceHitbox->OnComponentBeginOverlap.AddDynamic(
 		this, &AspaceManager ::onObjectEnter
@@ -40,13 +40,13 @@ void AspaceManager::onObjectEnter(
 	AActor* OtherActor,
 	UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex,
-	bool bFromSweep
-	const FHitREsult& SweepResult
+	bool bFromSweep, 
+	const FHitResult& SweepResult
 )
 {
 	AshelfObject* detectedObject = Cast<AshelfObject>(OtherActor);
 
-	if (detectedObject && !shelfObjects.Contains(detetectedObject))
+	if (detectedObject && !shelfObjects.Contains(detectedObject))
 	{
 		shelfObjects.Add(detectedObject);
 	}
@@ -69,17 +69,68 @@ void AspaceManager::onObjectExit(
 	if (objectX < managerX) shelfObjects.Remove(detectedObject);
 }
 
-// Called when the game starts or when spawned
-void AspaceManager::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
 
 // Called every frame
 void AspaceManager::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+	AActor::Tick(DeltaTime);
 
 }
 
+void AspaceManager::setRuleset(bool price, bool ratio, bool position)
+{
+	if (price == true)
+	{
+		isPriceRuleset = true;
+	}
+	if (ratio == true)
+	{
+		isRatioRuleset = true;
+	}
+	if (position == true)
+	{
+		isPositionRuleset = true;
+	}
+}
+
+int AspaceManager::priceCounter() {
+	int total = 0;
+	for (AshelfObject* item : shelfObjects)
+	{
+		if (!item) continue;
+		total += item->object.getPrice();
+	}
+	return total;
+}
+
+bool AspaceManager::ratioChecker(int objectOne, FString name, int objectTwo, FString nameTwo) {
+	int  objectOneTotal = 0;
+	int objectTwoTotal = 0;
+
+	for (AshelfObject* item : shelfObjects)
+	{
+		if (item->object.getName() == name) objectOneTotal++;
+		if (item->object.getName() == nameTwo) objectTwoTotal++;
+	}
+	if (objectOneTotal * objectOne == objectTwoTotal * objectTwo)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool AspaceManager::positionChecker(bool top, bool right, bool left, bool front, bool bottom, bool back, FString objectOne, FString objectTwo) 
+{
+	for (AshelfObject* item : shelfObjects) 
+	{
+		if (!item) continue;
+
+		if (top) 
+		{
+
+		}
+	}
+}

@@ -14,9 +14,23 @@ class ENGR_1300_PT_T6_API AspaceManager : public AActor
 {
 	GENERATED_BODY()
 
+private:
+	int totalPrice;
+	TArray<FString> names;
+	int goalPrice;
+	bool isPriceRuleset;
+	bool isRatioRuleset;
+	bool isPositionRuleset;
+	bool solved;
+
+
 public:	
 	// Sets default values for this actor's properties
 	AspaceManager();
+	void setRuleset(bool price, bool ratio, bool position);
+	int priceCounter();
+	bool ratioChecker(int objectOne, FString name, int objectTwo, FString nameTwo);
+	bool positionChecker(bool top, bool right, bool left, bool front, bool bottom, bool back, FString objectOne, FString objectTwo);
 
 protected:
 	// Called when the game starts or when spawned
