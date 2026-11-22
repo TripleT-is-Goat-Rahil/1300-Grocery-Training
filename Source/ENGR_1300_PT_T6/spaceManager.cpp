@@ -141,7 +141,88 @@ bool AspaceManager::positionChecker(bool top, bool right, bool left, bool front,
 			if (item->object.getName() == objectTwo) {
 				for (testingClass* subject : item->object.getTouchingTop())
 				{
-					if (subject->getName() == objectTwo) objectTwoSide++;
+					if (subject->getName() == objectOne) objectTwoSide++;
+				}
+			}
+		}
+
+		if (right)
+		{
+			if (item->object.getName() == objectOne) {
+				for (testingClass* subject : item->object.getTouchingLeft())
+				{
+					if (subject->getName() == objectTwo) objectOneSide++;
+				}
+			}
+			if (item->object.getName() == objectTwo) {
+				for (testingClass* subject : item->object.getTouchingRight())
+				{
+					if (subject->getName() == objectOne) objectTwoSide++;
+				}
+			}
+		}
+
+		if (left)
+		{
+			if (item->object.getName() == objectOne) {
+				for (testingClass* subject : item->object.getTouchingRight())
+				{
+					if (subject->getName() == objectTwo) objectOneSide++;
+				}
+			}
+			if (item->object.getName() == objectTwo) {
+				for (testingClass* subject : item->object.getTouchingLeft())
+				{
+					if (subject->getName() == objectOne) objectTwoSide++;
+				}
+			}
+		}
+
+
+		if (bottom)
+		{
+			if (item->object.getName() == objectOne) {
+				for (testingClass* subject : item->object.getTouchingTop())
+				{
+					if (subject->getName() == objectTwo) objectOneSide++;
+				}
+			}
+			if (item->object.getName() == objectTwo) {
+				for (testingClass* subject : item->object.getTouchingBottom())
+				{
+					if (subject->getName() == objectOne) objectTwoSide++;
+				}
+			}
+		}
+
+		if (front)
+		{
+			if (item->object.getName() == objectOne) {
+				for (testingClass* subject : item->object.getTouchingBack())
+				{
+					if (subject->getName() == objectTwo) objectOneSide++;
+				}
+			}
+			if (item->object.getName() == objectTwo) {
+				for (testingClass* subject : item->object.getTouchingFront())
+				{
+					if (subject->getName() == objectOne) objectTwoSide++;
+				}
+			}
+		}
+
+		if (back)
+		{
+			if (item->object.getName() == objectOne) {
+				for (testingClass* subject : item->object.getTouchingFront())
+				{
+					if (subject->getName() == objectTwo) objectOneSide++;
+				}
+			}
+			if (item->object.getName() == objectTwo) {
+				for (testingClass* subject : item->object.getTouchingBack())
+				{
+					if (subject->getName() == objectOne) objectTwoSide++;
 				}
 			}
 		}
