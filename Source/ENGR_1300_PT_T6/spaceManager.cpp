@@ -124,13 +124,26 @@ bool AspaceManager::ratioChecker(int objectOne, FString name, int objectTwo, FSt
 
 bool AspaceManager::positionChecker(bool top, bool right, bool left, bool front, bool bottom, bool back, FString objectOne, FString objectTwo) 
 {
+	int objectOneSide = 0;
+	int objectTwoSide = 0;
 	for (AshelfObject* item : shelfObjects) 
 	{
 		if (!item) continue;
 
 		if (top) 
 		{
-
+			if (item->object.getName() == objectOne) {
+				for (testingClass* subject : item->object.getTouchingBottom())
+				{
+					if (subject->getName()==objectTwo) objectOneSide++;
+				}
+			}
+			if (item->object.getName() == objectTwo) {
+				for (testingClass* subject : item->object.getTouchingTop())
+				{
+					if (subject->getName() == objectTwo) objectTwoSide++;
+				}
+			}
 		}
 	}
 }
